@@ -11,8 +11,8 @@
 				<h3>Burgers To Be Devoured</h3>
 
 				<ul>
-				{{#each burgers}}
-					{{#unless devoured}}
+				{{#each Burger}}
+					{{!-- {{#unless devoured}} --}}
 						<li>
 							{{burger_name}}
 
@@ -25,7 +25,7 @@
 							</button>
 						</li>
 
-					{{/unless}}
+					{{!-- {{/unless}} --}}
 				{{/each}}
 				</ul>
 			</div>
@@ -35,7 +35,7 @@
 			<h3>Too Late! Already have been devoured</h3>
 
 			<ul>
-				{{#each burgers}}
+				{{#each Burger}}
 					{{#if devoured}}
 						<li>
 							{{burger_name}}

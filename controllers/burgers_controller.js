@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var burger = require("../models/burger.js");
+var db = require("../models");
 
 //
 // Create all our routes and set up logic within those routes where required.
@@ -11,6 +11,15 @@ router.get("/", function(req, res) {
 	// 	};
 	// 	res.render("index", handlebarsObject);
 	// });
+	// findAll returns all entries for a table when used with no options
+    db.Burger.findAll({}).then(function(daBurgers) {
+		// We have access to the todos as an argument inside of the callback function
+		console.log(JSON.stringify(daBurgers));
+								var handlebarsObject = {
+									burgers: daBurgers
+								};
+		res.render("index", handlebarsObject );
+	  });
 });
 
 // 
@@ -23,6 +32,14 @@ router.post("/api/burgers", function(req, res) {
 	// ], function(result) {
 	// 	res.json({ id: result.insertId });
 	// });
+	db.Burger.create({
+		burger_name: req.body.burger_name,
+		devoured: req.body.devoured
+	  }).then(function(result) {
+		// We have access to the new todo as an argument inside of the callback function
+		res.json({ id: result.insertId });
+	  });
+
 });
 
 // PUT to update "burger" equal to "id" to "true"
